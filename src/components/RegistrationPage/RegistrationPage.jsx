@@ -1,22 +1,17 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import './LandingPage.css';
+import React from 'react';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import '../LandingPage/LandingPage.css';
 
-function LandingPage() {
+function RegistrationPage() {
 	const history = useHistory();
 
-	const onLogin = (event) => {
+	const handleConfirm = (event) => {
 		event.preventDefault();
-		console.log('test');
-	};
-
-	const onRegister = (event) => {
-		event.preventDefault();
-		history.push('/RegistrationPage');
+		history.push('/');
 	};
 
 	return (
-		<div className='container'>
+		<div>
 			<h1 className='title'>Fish Finder</h1>
 			<img src='images/fish_logo.jpg' alt='Fish Finder logo' />
 			<form className='flexContainer'>
@@ -32,11 +27,16 @@ function LandingPage() {
 					name='passwordInput'
 					id='passwordInput'
 				/>
-				<button onClick={onLogin}>Log In</button>
-				<button onClick={onRegister}>Register</button>
+				<input
+					type='text'
+					className='inputs'
+					name='confirmPasswordInput'
+					id='confirmPasswordInput'
+				/>
+				<button onClick={handleConfirm}>Confirm Registration</button>
 			</form>
 		</div>
 	);
 }
 
-export default LandingPage;
+export default RegistrationPage;
