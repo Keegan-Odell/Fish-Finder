@@ -12,7 +12,6 @@ function RegistrationPage() {
 
 	return (
 		<div>
-			<h1>penis</h1>
 			<h1 className='title'>Fish Finder</h1>
 			<img src='images/fish_logo.jpg' alt='Fish Finder logo' />
 			<form className='flexContainer'>
