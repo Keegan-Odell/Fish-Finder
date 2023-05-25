@@ -3,7 +3,7 @@ import React from 'react'
 function MapPage() {
   
   return (
-    <div>mapPage and COOOo</div>
+    <div>Meow</div>
   )
 }
 
