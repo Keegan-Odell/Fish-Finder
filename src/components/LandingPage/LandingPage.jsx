@@ -6,8 +6,8 @@ function LandingPage() {
 	const history = useHistory();
 
 	const onLogin = (event) => {
-		event.preventDefault();
-		console.log('test');
+		event.preventDefault()
+		history.push('/MapPage');
 	};
 
 	const onRegister = (event) => {
@@ -32,8 +32,8 @@ function LandingPage() {
 					name='passwordInput'
 					id='passwordInput'
 				/>
-				<button onClick={onLogin}>Log In</button>
-				<button onClick={onRegister}>Register</button>
+				<button className='test' onClick={onLogin}>Log In</button>
+				<button className='test' onClick={onRegister}>Register</button>
 			</form>
 		</div>
 	);

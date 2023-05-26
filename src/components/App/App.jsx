@@ -5,6 +5,7 @@ import './App.css';
 import LandingPage from '../LandingPage/LandingPage.jsx';
 import Footer from '../Footer/Footer.jsx';
 import RegistrationPage from '../RegistrationPage/RegistrationPage.jsx';
+import MapPage from '../MapPage/MapPage';
 
 function App() {
 	return (
@@ -15,6 +16,9 @@ function App() {
 				</Route>
 				<Route exact path='/RegistrationPage'>
 					<RegistrationPage />
+				</Route>
+				<Route exact path='/MapPage'>
+					<MapPage />
 				</Route>
 			</Router>
 			<Footer />
