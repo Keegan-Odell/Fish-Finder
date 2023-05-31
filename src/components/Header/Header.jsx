@@ -1,8 +1,10 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 function Header() {
 	const history = useHistory();
+	const dispatch = useDispatch();
 
 	const handleAbout = (event) => {
 		event.preventDefault();
@@ -10,7 +12,9 @@ function Header() {
 	};
 
 	const handleLogOut = (event) => {
-		event.preventDefault();
+		dispatch({
+			type: 'LOGOUT',
+		});
 		history.push('/');
 	};
 
