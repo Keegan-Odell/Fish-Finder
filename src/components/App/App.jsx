@@ -6,11 +6,14 @@ import LandingPage from '../LandingPage/LandingPage.jsx';
 import Footer from '../Footer/Footer.jsx';
 import RegistrationPage from '../RegistrationPage/RegistrationPage.jsx';
 import MapPage from '../MapPage/MapPage';
+import Header from '../Header/Header';
+import About from '../About/About';
 
 function App() {
 	return (
 		<div>
 			<Router>
+			<Header />
 				<Route exact path='/'>
 					<LandingPage />
 				</Route>
@@ -19,6 +22,9 @@ function App() {
 				</Route>
 				<Route exact path='/MapPage'>
 					<MapPage />
+				</Route>
+				<Route exact path='/About'>
+					<About />
 				</Route>
 			</Router>
 			<Footer />
