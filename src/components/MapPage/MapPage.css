@@ -47,3 +47,11 @@ button:hover {
 .dropdown:hover .dropbtn {
 	background-color: darkblue;
 }
+
+.mapContainer {
+	width: 70%;
+	height: 70vh;
+	position: fixed;
+	left: 275px;
+	bottom: 300px;
+}

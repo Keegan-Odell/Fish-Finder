@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+
 import './MapPage.css';
 import DropDown from '../DropDown/DropDown';
+import GoogleMapComponent from '../GoogleMapComponent/GoogleMapComponent';
 
 function MapPage() {
 	const months = [
@@ -56,13 +58,20 @@ function MapPage() {
 	return (
 		<div>
 			<div className='title'>Fish Finder</div>
-			<DropDown info={months} title={monthTitle} />
-			<DropDown info={lengths} title={lengthsTitle} />
-			<DropDown info={typeOfFish} title={typeOfFishTitle} />
-			<DropDown info={waterTemp} title={waterTempTitle} />
-			<button>Search</button>
-			<button onClick={handleReset}>Reset</button>
-			<button>Add New Fish</button>
+			<div className='container'>
+				<div className='sidebar'>
+					<DropDown info={months} title={monthTitle} />
+					<DropDown info={lengths} title={lengthsTitle} />
+					<DropDown info={typeOfFish} title={typeOfFishTitle} />
+					<DropDown info={waterTemp} title={waterTempTitle} />
+					<button>Search</button>
+					<button onClick={handleReset}>Reset</button>
+					<button>Add New Fish</button>
+				</div>
+				<div className='map'>
+					<GoogleMapComponent />
+				</div>
+			</div>
 		</div>
 	);
 }
