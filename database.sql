@@ -16,8 +16,8 @@ CREATE TABLE "catch" (
 	"month" VARCHAR(80),
 	"latitude" DECIMAL NOT NULL,
 	"longitude" DECIMAL NOT NULL,
-	"length" INTEGER,
-	"water_temp" INTEGER 
+	"length" VARCHAR(80),
+	"water_temp" VARCHAR(80) 
 )
 
 CREATE TABLE "fish" (

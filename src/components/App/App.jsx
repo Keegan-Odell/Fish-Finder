@@ -20,12 +20,27 @@ import About from '../About/About';
 function App() {
 	const dispatch = useDispatch();
 	const user = useSelector((store) => store.user);
+	const catchArray = useSelector((store) => store.catches.getCatches);
 
 	useEffect(() => {
 		dispatch({
 			type: 'FETCH_USER',
 		});
 	}, []);
+
+	useEffect(() => {
+		dispatch({
+			type: 'GET_CATCH_OBJECT',
+		});
+	}, []);
+
+	useEffect(() => {
+		dispatch({
+			type: 'FETCH_CATCHES',
+		});
+	}, []);
+
+	console.log(catchArray);
 
 	return (
 		<div>

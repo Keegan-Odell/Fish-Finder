@@ -3,8 +3,12 @@ import React, { useState } from 'react';
 import './MapPage.css';
 import DropDown from '../DropDown/DropDown';
 import GoogleMapComponent from '../GoogleMapComponent/GoogleMapComponent';
+import CreateFishForm from '../CreateFishForm/CreateFishForm';
+import { useSelector } from 'react-redux';
 
 function MapPage() {
+	const catchObject = useSelector((store) => store.catchObject);
+	console.log(catchObject);
 	const months = [
 		'January',
 		'February',
@@ -47,6 +51,9 @@ function MapPage() {
 	let [typeOfFishTitle, setTypeOfFishTitle] = useState('Type Of Fish');
 	let [waterTempTitle, setWaterTempTitle] = useState('Water Temperature (F°)');
 
+	//conditional render boolean
+	let [newFishForm, setNewFishForm] = useState(false);
+
 	let handleReset = () => {
 		setMonthTitle('Months');
 		setLengthsTitle('Length (inches)');
@@ -55,18 +62,44 @@ function MapPage() {
 		window.location.reload(true);
 	};
 
+	const handleNewFish = () => {
+		if (newFishForm === true) {
+			setNewFishForm(false);
+		} else {
+			setNewFishForm(true);
+		}
+		console.log(newFishForm);
+	};
+
+	const conditionalRenderNewFishForm = () => {
+		if (newFishForm === true) {
+			return <CreateFishForm />;
+		} else {
+			return <></>;
+		}
+	};
+
 	return (
 		<div>
 			<div className='title'>Fish Finder</div>
 			<div className='container'>
 				<div className='sidebar'>
-					<DropDown info={months} title={monthTitle} />
-					<DropDown info={lengths} title={lengthsTitle} />
-					<DropDown info={typeOfFish} title={typeOfFishTitle} />
-					<DropDown info={waterTemp} title={waterTempTitle} />
+					<DropDown info={months} title={monthTitle} propMod={'month'} />
+					<DropDown info={lengths} title={lengthsTitle} propMod={'length'} />
+					<DropDown
+						info={typeOfFish}
+						title={typeOfFishTitle}
+						propMod={'fishID'}
+					/>
+					<DropDown
+						info={waterTemp}
+						title={waterTempTitle}
+						propMod={'waterTemp'}
+					/>
+					{conditionalRenderNewFishForm()}
 					<button>Search</button>
+					<button onClick={handleNewFish}>Add New Fish</button>
 					<button onClick={handleReset}>Reset</button>
-					<button>Add New Fish</button>
 				</div>
 				<div className='map'>
 					<GoogleMapComponent />

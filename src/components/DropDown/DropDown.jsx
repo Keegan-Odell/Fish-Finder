@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 function DropDown(props) {
+	const catchObject = useSelector((store) => store.catchObject);
 	let [title, setTitle] = useState(props.title);
+	let propMod = props.propMod;
 
 	return (
 		<div className='sideBar'>
@@ -13,6 +16,8 @@ function DropDown(props) {
 							<button
 								onClick={(e) => {
 									setTitle(info);
+									catchObject[propMod] = info;
+									console.log(catchObject);
 								}}
 								key={index}
 								className='monthBtn'>

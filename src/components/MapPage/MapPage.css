@@ -55,3 +55,7 @@ button:hover {
 	left: 275px;
 	bottom: 300px;
 }
+
+label {
+	color: white;
+}
