@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
+import { useDispatch, useSelector } from 'react-redux';
 
 function GoogleMapComponent() {
 	const { isLoaded } = useLoadScript({
@@ -12,10 +13,12 @@ function GoogleMapComponent() {
 }
 
 function Map() {
-	const handleClick = () => {
-		console.log('test');
-	};
+	const dispatch = useDispatch();
+	const catches = useSelector((store) => store.catches.getCatches);
+	const singleFish = useSelector((store) => store.catches.getOneCatch);
 	const center = useMemo(() => ({ lat: 47.418, lng: -93.507 }), []);
+	const [conditionalRender, setConditionalRender] = useState(false);
+	const [fishToShow, setFishToShow] = useState(0);
 	const icon = {
 		url: 'images/fish-svgrepo-com.svg',
 		anchor: new google.maps.Point(10, 30),
@@ -23,15 +26,61 @@ function Map() {
 		scaledSize: new google.maps.Size(25, 30),
 	};
 
+	const fetchOneFish = (num) => {
+		console.log(num);
+		dispatch({
+			type: 'GET_ONE_FISH',
+			payload: num,
+		});
+	};
+
+	const handleClose = () => {
+		setConditionalRender(false);
+	};
+
+	// const conditionalRenderInfo = () => {
+	// 	if (conditionalRender === true) {
+	// 		return (
+	// 			<>
+	// 				<button onClick={handleClose}>Close</button>
+	// 				<table>
+	// 					<tr>
+	// 						<td>Month Caught: </td>
+	// 						<td></td>
+	// 					</tr>
+	// 				</table>
+	// 			</>
+	// 		);
+	// 	} else {
+	// 		return <></>;
+	// 	}
+	// };
+
 	return (
-		<GoogleMap zoom={14} center={center} mapContainerClassName='mapContainer'>
-			<MarkerF
-				key='marker1'
-				onClick={handleClick}
-				icon={icon}
-				position={{ lat: 47.418, lng: -93.507 }}
-			/>
-		</GoogleMap>
+		<div>
+			{/* {conditionalRenderInfo()} */}
+			<GoogleMap zoom={14} center={center} mapContainerClassName='mapContainer'>
+				{catches.map((catches, index) => {
+					return (
+						<MarkerF
+							key={index}
+							onClick={() => {
+								if (conditionalRender === false) {
+									setConditionalRender(true);
+								}
+								fetchOneFish(catches.id);
+								// console.log(catches.id);
+							}}
+							icon={icon}
+							position={{
+								lat: Number(catches.latitude),
+								lng: Number(catches.longitude),
+							}}
+						/>
+					);
+				})}
+			</GoogleMap>
+		</div>
 	);
 }
 

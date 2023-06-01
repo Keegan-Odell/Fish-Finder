@@ -27,7 +27,17 @@ const getCatches = (state = [], action) => {
 	}
 };
 
+const getOneCatch = (state = [], action) => {
+	switch (action.type) {
+		case 'SET_ONE_CATCH':
+			return action.payload;
+		default:
+			return state;
+	}
+};
+
 export default combineReducers({
-  getCatchObject,
-  getCatches,
+	getCatchObject,
+	getCatches,
+	getOneCatch,
 });

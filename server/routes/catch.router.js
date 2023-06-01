@@ -8,19 +8,23 @@ const router = express.Router();
 /**
  * GET route template
  */
+router.get('/:id', (req, res) => {
+	let catchToGrab = req.params.id;
+	console.log(catchToGrab);
+});
+
 router.get('/', rejectUnauthenticated, (req, res) => {
 	// GET route code here
 	const userID = req.user.id;
 
 	sqlText = `
-	SELECT catch.month, catch.length, fish.name, catch.water_temp, catch.latitude, catch.longitude FROM "catch"
+	SELECT catch.id, catch.month, catch.length, fish.name, catch.water_temp, catch.latitude, catch.longitude FROM "catch"
 	JOIN "fish" ON catch.fish_id=fish.id
 	WHERE "user_id" = $1
 	`;
 	pool
 		.query(sqlText, [userID])
 		.then((results) => {
-			console.log(results.rows);
 			res.send(results.rows);
 		})
 		.catch((err) => {
@@ -58,7 +62,6 @@ router.post('/', (req, res) => {
 	const lon = data.lon;
 	const length = data.length;
 	const waterTemp = data.waterTemp;
-	console.log(fishID);
 
 	const createCatch = `
 	INSERT INTO "catch" ("user_id", "fish_id", "month", "latitude", "longitude", "length", "water_temp")

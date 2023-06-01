@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 function DropDown(props) {
-	const catchObject = useSelector((store) => store.catchObject);
+	const catchObject = useSelector((store) =>  store.catches.getCatchObject);
 	let [title, setTitle] = useState(props.title);
 	let propMod = props.propMod;
 

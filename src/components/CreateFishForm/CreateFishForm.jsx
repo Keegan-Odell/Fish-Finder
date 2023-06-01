@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 function CreateFishForm() {
 	const dispatch = useDispatch();
-	const catchObject = useSelector((store) => store.catchObject);
+	const catchObject = useSelector((store) =>  store.catches.getCatchObject);
 	const [lat, setLat] = useState(0);
 	const [lon, setLon] = useState(0);
 

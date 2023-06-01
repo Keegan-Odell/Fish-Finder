@@ -7,8 +7,6 @@ import CreateFishForm from '../CreateFishForm/CreateFishForm';
 import { useSelector } from 'react-redux';
 
 function MapPage() {
-	const catchObject = useSelector((store) => store.catchObject);
-	console.log(catchObject);
 	const months = [
 		'January',
 		'February',
