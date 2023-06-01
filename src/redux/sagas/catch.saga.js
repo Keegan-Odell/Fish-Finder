@@ -23,7 +23,7 @@ function* createNewCatch(action) {
 function* getOneFish(action) {
 	try {
 		const response = yield axios.get(`/api/catch/${action.payload}`);
-		yield put({ type: 'SET_CATCHES', payload: response.data });
+		yield put({ type: 'SET_ONE_CATCH', payload: response.data });
 	} catch {
 		console.log('error getting one fish');
 	}

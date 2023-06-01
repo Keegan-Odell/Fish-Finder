@@ -18,7 +18,6 @@ function Map() {
 	const singleFish = useSelector((store) => store.catches.getOneCatch);
 	const center = useMemo(() => ({ lat: 47.418, lng: -93.507 }), []);
 	const [conditionalRender, setConditionalRender] = useState(false);
-	const [fishToShow, setFishToShow] = useState(0);
 	const icon = {
 		url: 'images/fish-svgrepo-com.svg',
 		anchor: new google.maps.Point(10, 30),
@@ -38,27 +37,44 @@ function Map() {
 		setConditionalRender(false);
 	};
 
-	// const conditionalRenderInfo = () => {
-	// 	if (conditionalRender === true) {
-	// 		return (
-	// 			<>
-	// 				<button onClick={handleClose}>Close</button>
-	// 				<table>
-	// 					<tr>
-	// 						<td>Month Caught: </td>
-	// 						<td></td>
-	// 					</tr>
-	// 				</table>
-	// 			</>
-	// 		);
-	// 	} else {
-	// 		return <></>;
-	// 	}
-	// };
+	const conditionalRenderInfo = () => {
+		console.log();
+		if (conditionalRender === true) {
+			return (
+				<>
+					<button onClick={handleClose}>Close</button>
+					<table>
+						<tbody>
+							<tr>
+								<td>Month Caught: </td>
+								<td>{singleFish[0].month}</td>
+							</tr>
+							<tr>
+								<td>Length (inches): </td>
+								<td>{singleFish[0].length}</td>
+							</tr>
+							<tr>
+								<td>Fish Type: </td>
+								<td>{singleFish[0].name}</td>
+							</tr>
+							<tr>
+								<td>Water Temp (F°): </td>
+								<td>{singleFish[0].water_temp}</td>
+							</tr>
+						</tbody>
+					</table>
+					<button>Update</button>
+					<button>Delete</button>
+				</>
+			);
+		} else {
+			return <></>;
+		}
+	};
 
 	return (
 		<div>
-			{/* {conditionalRenderInfo()} */}
+			{conditionalRenderInfo()}
 			<GoogleMap zoom={14} center={center} mapContainerClassName='mapContainer'>
 				{catches.map((catches, index) => {
 					return (
@@ -69,7 +85,6 @@ function Map() {
 									setConditionalRender(true);
 								}
 								fetchOneFish(catches.id);
-								// console.log(catches.id);
 							}}
 							icon={icon}
 							position={{

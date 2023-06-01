@@ -10,7 +10,21 @@ const router = express.Router();
  */
 router.get('/:id', (req, res) => {
 	let catchToGrab = req.params.id;
-	console.log(catchToGrab);
+
+	sqlText = `
+	SELECT catch.id, catch.month, catch.length, fish.name, catch.water_temp, catch.latitude, catch.longitude FROM "catch"
+	JOIN "fish" ON catch.fish_id=fish.id
+	WHERE catch.id = $1	
+	`;
+	pool
+		.query(sqlText, [catchToGrab])
+		.then((results) => {
+			res.send(results.rows);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.sendStatus(500);
+		});
 });
 
 router.get('/', rejectUnauthenticated, (req, res) => {
