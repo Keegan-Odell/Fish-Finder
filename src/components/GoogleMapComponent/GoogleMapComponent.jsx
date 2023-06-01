@@ -1,5 +1,5 @@
-import React from 'react';
-import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import React, { useMemo } from 'react';
+import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 
 function GoogleMapComponent() {
 	const { isLoaded } = useLoadScript({
@@ -12,11 +12,26 @@ function GoogleMapComponent() {
 }
 
 function Map() {
+	const handleClick = () => {
+		console.log('test');
+	};
+	const center = useMemo(() => ({ lat: 47.418, lng: -93.507 }), []);
+	const icon = {
+		url: 'images/fish-svgrepo-com.svg',
+		anchor: new google.maps.Point(10, 30),
+		origin: new google.maps.Point(0, 0),
+		scaledSize: new google.maps.Size(25, 30),
+	};
+
 	return (
-		<GoogleMap
-			zoom={10}
-			center={{ lat: 44, lng: -80 }}
-			mapContainerClassName='mapContainer'></GoogleMap>
+		<GoogleMap zoom={14} center={center} mapContainerClassName='mapContainer'>
+			<MarkerF
+				key='marker1'
+				onClick={handleClick}
+				icon={icon}
+				position={{ lat: 47.418, lng: -93.507 }}
+			/>
+		</GoogleMap>
 	);
 }
 
