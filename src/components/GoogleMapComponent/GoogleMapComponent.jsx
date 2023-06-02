@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { GoogleMap, useLoadScript, MarkerF } from '@react-google-maps/api';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 
 function GoogleMapComponent() {
 	const { isLoaded } = useLoadScript({
@@ -14,6 +15,7 @@ function GoogleMapComponent() {
 
 function Map() {
 	const dispatch = useDispatch();
+	const history = useHistory();
 	const catches = useSelector((store) => store.catches.getCatches);
 	const singleFish = useSelector((store) => store.catches.getOneCatch);
 	const center = useMemo(() => ({ lat: 47.418, lng: -93.507 }), []);
@@ -26,7 +28,6 @@ function Map() {
 	};
 
 	const fetchOneFish = (num) => {
-		console.log(num);
 		dispatch({
 			type: 'GET_ONE_FISH',
 			payload: num,
@@ -37,8 +38,19 @@ function Map() {
 		setConditionalRender(false);
 	};
 
+	const handleDelete = (num) => {
+		dispatch({
+			type: 'DELETE_CATCH',
+			payload: num,
+		});
+		setConditionalRender(false);
+	};
+
+	const handleUpdate = () => {
+		history.push(`/edit/${singleFish[0].id}`);
+	};
+
 	const conditionalRenderInfo = () => {
-		console.log();
 		if (conditionalRender === true) {
 			return (
 				<>
@@ -59,12 +71,25 @@ function Map() {
 							</tr>
 							<tr>
 								<td>Water Temp (F°): </td>
-								<td>{singleFish[0].water_temp}</td>
+								<td>{singleFish[0].water_temp} F°</td>
+							</tr>
+							<tr>
+								<td>Latitude: </td>
+								<td>{singleFish[0].latitude}°</td>
+							</tr>
+							<tr>
+								<td>Latitude: </td>
+								<td>{singleFish[0].longitude}°</td>
 							</tr>
 						</tbody>
 					</table>
-					<button>Update</button>
-					<button>Delete</button>
+					<button onClick={handleUpdate}>Update</button>
+					<button
+						onClick={() => {
+							handleDelete(singleFish[0].id);
+						}}>
+						Delete
+					</button>
 				</>
 			);
 		} else {

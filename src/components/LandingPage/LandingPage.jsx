@@ -71,7 +71,7 @@ function LandingPage() {
 					<div className='passwordContainer'>
 						<label htmlFor='passwordInput'>Password: </label>
 						<input
-							type='text'
+							type='password'
 							className='inputs'
 							name='passwordInput'
 							value={password}

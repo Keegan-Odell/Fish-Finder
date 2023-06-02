@@ -38,11 +38,31 @@ function* fetchCatches() {
 	}
 }
 
+function* deleteCatch(action) {
+	try {
+		yield axios.delete(`/api/catch/${action.payload}`);
+		yield put({ type: 'FETCH_CATCHES' });
+	} catch {
+		console.log('error deleting catch');
+	}
+}
+
+function* updateCatch(action) {
+	try {
+		yield axios.put(`/api/catch/${action.payload.id}`, action.payload);
+		yield put({ type: 'FETCH_CATCHES' });
+	} catch {
+		console.log('error updating');
+	}
+}
+
 function* catchObjectSaga() {
 	yield takeLatest('GET_CATCH_OBJECT', getCatchObject);
 	yield takeLatest('CREATE_NEW_CATCH', createNewCatch);
 	yield takeLatest('FETCH_CATCHES', fetchCatches);
 	yield takeLatest('GET_ONE_FISH', getOneFish);
+	yield takeLatest('DELETE_CATCH', deleteCatch);
+	yield takeLatest('EDIT_CATCH_MONTH', updateCatch);
 }
 
 export default catchObjectSaga;

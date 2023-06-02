@@ -12,6 +12,10 @@ function RegistrationPage() {
 	const errors = useSelector((store) => store.errors);
 
 	const handleRegistration = (event) => {
+		const handleBack = () => {
+			history.push('/');
+		};
+
 		event.preventDefault();
 
 		if (password === confirmPassword) {
@@ -81,6 +85,7 @@ function RegistrationPage() {
 					/>
 				</div>
 			</form>
+			<button onClick={handleBack}>Back</button>
 		</div>
 	);
 }

@@ -93,4 +93,52 @@ router.post('/', (req, res) => {
 		});
 });
 
+router.delete('/:id', rejectUnauthenticated, (req, res) => {
+	if (req.user != undefined) {
+		idToDelete = req.params.id;
+		userID = req.user.id;
+
+		sqlQuery = `
+		DELETE FROM catch 
+		WHERE catch.id=$1
+		AND catch.user_id=$2
+		`;
+		pool
+			.query(sqlQuery, [idToDelete, userID])
+			.then((response) => {
+				res.sendStatus(200);
+			})
+			.catch((err) => {
+				console.log(err);
+			});
+	} else {
+		console.log('User was not logged in');
+	}
+});
+
+router.put('/:id', rejectUnauthenticated, (req, res) => {
+	console.log(req.body);
+	id = req.body.id;
+	month = req.body.month;
+	length = req.body.length;
+	latitude = req.body.latitude;
+	longitude = req.body.longitude;
+	sqlQuery = `
+	UPDATE "catch"
+	SET month = $1,
+			length = $2,
+			latitude = $3,
+			longitude = $4
+	WHERE catch.id = $5
+	`;
+	pool
+		.query(sqlQuery, [month, length, latitude, longitude, id])
+		.then((response) => {
+			res.sendStatus(200);
+		})
+		.catch((err) => {
+			console.log(err);
+		});
+});
+
 module.exports = router;

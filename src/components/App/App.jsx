@@ -16,6 +16,7 @@ import RegistrationPage from '../RegistrationPage/RegistrationPage.jsx';
 import MapPage from '../MapPage/MapPage';
 import Header from '../Header/Header';
 import About from '../About/About';
+import EditPage from '../EditPage/EditPage';
 
 function App() {
 	const dispatch = useDispatch();
@@ -54,6 +55,10 @@ function App() {
 
 				<ProtectedRoute exact path='/MapPage'>
 					<MapPage />
+				</ProtectedRoute>
+
+				<ProtectedRoute exact path='/edit/:id'>
+					<EditPage />
 				</ProtectedRoute>
 
 				<Route exact path='/About'>
