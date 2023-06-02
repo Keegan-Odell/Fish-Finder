@@ -8,6 +8,12 @@ const router = express.Router();
 /**
  * GET route template
  */
+
+router.put('/search', (req, res) => {
+	let search = req.body;
+	
+});
+
 router.get('/:id', (req, res) => {
 	let catchToGrab = req.params.id;
 

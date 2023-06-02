@@ -5,8 +5,11 @@ import DropDown from '../DropDown/DropDown';
 import GoogleMapComponent from '../GoogleMapComponent/GoogleMapComponent';
 import CreateFishForm from '../CreateFishForm/CreateFishForm';
 import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 function MapPage() {
+	const dispatch = useDispatch();
+	const catchObject = useSelector((store) => store.catches.getCatchObject);
 	const months = [
 		'January',
 		'February',
@@ -60,6 +63,13 @@ function MapPage() {
 		window.location.reload(true);
 	};
 
+	const handleSearch = () => {
+		dispatch({
+			type: 'SEARCH_FOR_FISHES',
+			payload: catchObject,
+		});
+	};
+
 	const handleNewFish = () => {
 		if (newFishForm === true) {
 			setNewFishForm(false);
@@ -95,7 +105,7 @@ function MapPage() {
 						propMod={'waterTemp'}
 					/>
 					{conditionalRenderNewFishForm()}
-					<button>Search</button>
+					<button onClick={handleSearch}>Search</button>
 					<button onClick={handleNewFish}>Add New Fish</button>
 					<button onClick={handleReset}>Reset</button>
 				</div>

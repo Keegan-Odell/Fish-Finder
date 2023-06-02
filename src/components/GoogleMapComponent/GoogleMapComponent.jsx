@@ -78,7 +78,7 @@ function Map() {
 								<td>{singleFish[0].latitude}°</td>
 							</tr>
 							<tr>
-								<td>Latitude: </td>
+								<td>Longitude: </td>
 								<td>{singleFish[0].longitude}°</td>
 							</tr>
 						</tbody>

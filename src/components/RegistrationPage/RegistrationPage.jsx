@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import '../LandingPage/LandingPage.css';
 
 function RegistrationPage() {
+	const handleBack = () => {
+		history.push('/');
+	};
+
 	const history = useHistory();
 	const dispatch = useDispatch();
 	const [username, setUsername] = useState('');
@@ -12,10 +16,6 @@ function RegistrationPage() {
 	const errors = useSelector((store) => store.errors);
 
 	const handleRegistration = (event) => {
-		const handleBack = () => {
-			history.push('/');
-		};
-
 		event.preventDefault();
 
 		if (password === confirmPassword) {
