@@ -10,8 +10,54 @@ const router = express.Router();
  */
 
 router.put('/search', (req, res) => {
-	let search = req.body;
-	
+	const nullChange = (toCompare) => {
+		if (toCompare === null) {
+			return '';
+		} else {
+			return toCompare;
+		}
+	};
+	function fishToFishID(fishString) {
+		if (fishString === 'Largemouth Bass') {
+			return 1;
+		} else if (fishString === 'Smallmouth Bass') {
+			return 2;
+		} else if (fishString === 'Walleye') {
+			return 3;
+		} else if (fishString === 'Lake Trout') {
+			return 4;
+		} else if (fishString === 'Northern Pike') {
+			return 5;
+		} else {
+			return 6;
+		}
+	}
+	``;
+	// POST route code here
+	const data = req.body;
+	const userID = nullChange(req.user.id);
+	const fishID = fishToFishID(data.fishID);
+	const month = nullChange(data.month);
+	const length = nullChange(data.length);
+	const waterTemp = nullChange(data.waterTemp);
+
+	console.log(userID, fishID, month, length, waterTemp);
+
+	sqlText = `
+	SELECT catch.id, catch.month, catch.length, fish.name, catch.water_temp, catch.latitude, catch.longitude FROM "catch"
+	JOIN "fish" ON catch.fish_id=fish.id
+	WHERE "user_id"=$1 AND catch.fish_id=$2 OR catch.month =$3 OR catch.length=$4 OR catch.water_temp=$5
+	`;
+	pool
+		.query(sqlText, [userID, fishID, month, length, waterTemp])
+		.then((results) => {
+			console.log(results.rows);
+			res.send(results.rows);
+		})
+		.catch((err) => {
+			console.log(err);
+			res.sendStatus(500);
+		});
 });
 
 router.get('/:id', (req, res) => {

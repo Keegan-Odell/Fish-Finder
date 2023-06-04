@@ -55,7 +55,7 @@ function RegistrationPage() {
 				<div className='passwordContainer'>
 					<label htmlFor='passwordInput'>Password: </label>
 					<input
-						type='text'
+						type='password'
 						className='inputs'
 						name='passwordInput'
 						id='passwordInput'
@@ -67,7 +67,7 @@ function RegistrationPage() {
 				<div className='confirmPasswordContainer'>
 					<label htmlFor='confirmPasswordInput'>Confirm Password: </label>
 					<input
-						type='text'
+						type='password'
 						className='inputs'
 						name='confirmPasswordInput'
 						id='confirmPasswordInput'
@@ -83,9 +83,15 @@ function RegistrationPage() {
 						name='submit'
 						value='Register'
 					/>
+					<input
+						className='test'
+						type='button'
+						name='submit'
+						value='Back'
+						onClick={handleBack}
+					/>
 				</div>
 			</form>
-			<button onClick={handleBack}>Back</button>
 		</div>
 	);
 }

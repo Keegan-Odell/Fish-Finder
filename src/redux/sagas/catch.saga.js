@@ -59,7 +59,7 @@ function* updateCatch(action) {
 function* getSearch(action) {
 	try {
 		console.log(action.payload);
-		const response = yield axios.put('/api/catch/search', action.payload)
+		const response = yield axios.put('/api/catch/search', action.payload);
 		yield put({ type: 'SET_CATCHES', payload: response.data });
 	} catch {
 		console.log('error search');

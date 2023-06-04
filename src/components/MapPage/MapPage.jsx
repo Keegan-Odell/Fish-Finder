@@ -105,8 +105,8 @@ function MapPage() {
 						propMod={'waterTemp'}
 					/>
 					{conditionalRenderNewFishForm()}
-					<button onClick={handleSearch}>Search</button>
 					<button onClick={handleNewFish}>Add New Fish</button>
+					<button onClick={handleSearch}>Search</button>
 					<button onClick={handleReset}>Reset</button>
 				</div>
 				<div className='map'>

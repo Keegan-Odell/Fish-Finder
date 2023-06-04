@@ -54,7 +54,6 @@ function Map() {
 		if (conditionalRender === true) {
 			return (
 				<>
-					<button onClick={handleClose}>Close</button>
 					<table>
 						<tbody>
 							<tr>
@@ -83,6 +82,7 @@ function Map() {
 							</tr>
 						</tbody>
 					</table>
+					<button onClick={handleClose}>Close</button>
 					<button onClick={handleUpdate}>Update</button>
 					<button
 						onClick={() => {

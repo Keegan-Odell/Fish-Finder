@@ -79,9 +79,13 @@ function LandingPage() {
 						/>
 					</div>
 					<input className='test' type='submit' name='submit' value='Log In' />
-					<button className='test' onClick={handleRegister}>
-						Register
-					</button>
+					<input
+						className='test'
+						type='button'
+						name='submit'
+						value='Register'
+						onClick={handleRegister}
+					/>
 				</form>
 			);
 		}

@@ -51,7 +51,7 @@ button:hover {
 .mapContainer {
 	width: 70%;
 	height: 70vh;
-	position: fixed;
+	position: absolute;
 	left: 275px;
 	bottom: 300px;
 }
